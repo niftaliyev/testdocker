@@ -1,0 +1,24 @@
+﻿# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+  asp:
+    build: ./
+    ports:
+        - 8081:80
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: 1
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
